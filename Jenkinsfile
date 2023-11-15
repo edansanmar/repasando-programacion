@@ -18,7 +18,7 @@ pipeline {
         stage('Build') {
             steps {
                 timeout(time: 2, unit: 'MINUTES'){
-                    sh "mvn -DskipTests clean package -f ./pom.xml"
+                    sh "mvn -DskipTests clean package -f repasando-programacion/blob/master/pom.xmlpom.xml"
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 timeout(time: 2, unit: 'MINUTES'){
                     // Se cambia <test> por <install> para que se genere el reporte de jacoco
-                    sh "mvn clean install -f repasando-programacion/pom.xml"
+                    sh "mvn clean install -f repasando-programacion/blob/master/pom.xmlpom.xml"
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 timeout(time: 2, unit: 'MINUTES'){
                     withSonarQubeEnv('sonarqube'){
-                        sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Pcoverage -f ./pom.xml"
+                        sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Pcoverage -f repasando-programacion/blob/master/pom.xmlpom.xml"
                     }
                 }
             }
