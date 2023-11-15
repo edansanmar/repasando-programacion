@@ -18,7 +18,7 @@ pipeline {
         stage('Build') {
             steps {
                 timeout(time: 2, unit: 'MINUTES'){
-                    sh "mvn -DskipTests clean package -f repasando-programacion/pom.xml"
+                    sh "mvn -DskipTests clean package -f ./pom.xml"
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 timeout(time: 2, unit: 'MINUTES'){
                     withSonarQubeEnv('sonarqube'){
-                        sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Pcoverage -f repasando-programacion/pom.xml"
+                        sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Pcoverage -f ./pom.xml"
                     }
                 }
             }
@@ -51,7 +51,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo "mvn spring-boot:run -f repasando-programacion/pom.xml"
+                echo "mvn spring-boot:run -f ./pom.xml"
             }
         }
     }
